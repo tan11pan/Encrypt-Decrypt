@@ -24,11 +24,36 @@ class Encrypt
 
         for(int i = 0; i < m.length(); i++)
         {
-            char encrypted = (char)(m.charAt(i) ^ k.charAt(i % k.length()));
+            char encrypted = (char)((m.charAt(i) ^ k.charAt(i % k.length())));
             result.append(encrypted);
         }
 
         return result.toString(); 
+    }
+
+    String vignere(String m, String k)
+    {
+        char[][] vigtable = new char[26][26];
+        for(char i='a';i<='z' ;i++)
+        {
+            for(char j=0;j<26;j++)
+            {
+                char c = (char)(i+j);
+                vigtable[i][j]=c;
+                if(c>'z')
+                {
+                    c=(char)(c-26);
+                }
+            }
+
+        }
+        StringBuilder result = new StringBuilder(); 
+
+        for(int i = 0; i < m.length(); i++)
+        {
+            char x = (char)((m.charAt(i)));
+            result.append(encrypted);
+        }
     }
 }
 
@@ -36,8 +61,8 @@ public class enc
 {
     public static void main(String[] args)
     {
-        String msg = "Parva B my love";
-        String key = "gg";
+        String msg = "tany";
+        String key = "20186";
 
         Encrypt e = new Encrypt(msg);
 
@@ -46,5 +71,7 @@ public class enc
 
         System.out.println("Encrypted: " + encrypted);
         System.out.println("Decrypted: " + decrypted);
+
+        
     }
 }
