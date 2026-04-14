@@ -32,37 +32,47 @@ class Encrypt
     }
 
     String vignere(String m, String k)
+{
+    char[][] vigtable = new char[26][26];
+    for(int i = 0; i < 26; i++)
     {
-        char[][] vigtable = new char[26][26];
-        for(char i='a';i<='z' ;i++)
+        for(int j = 0; j < 26; j++)
         {
-            for(char j=0;j<26;j++)
-            {
-                char c = (char)(i+j);
-                vigtable[i][j]=c;
-                if(c>'z')
-                {
-                    c=(char)(c-26);
-                }
-            }
-
-        }
-        StringBuilder result = new StringBuilder(); 
-
-        for(int i = 0; i < m.length(); i++)
-        {
-            char x = (char)((m.charAt(i)));
-            result.append(encrypted);
+            char c = (char)('a' + (i + j) % 26);
+            vigtable[i][j] = c;
         }
     }
+
+    StringBuilder result = new StringBuilder();
+
+    for(int i = 0; i < m.length(); i++)
+    {
+        char msgChar = Character.toLowerCase(m.charAt(i));
+        char keyChar = Character.toLowerCase(k.charAt(i % k.length()));
+
+        if(msgChar >= 'a' && msgChar <= 'z')
+        {
+            int row = msgChar - 'a';
+            int col = keyChar - 'a';
+            char encrypted = vigtable[row][col];
+            result.append(encrypted);
+        }
+        else
+        {
+            result.append(m.charAt(i));
+        }
+    }
+
+    return result.toString();
 }
 
+}
 public class enc
 {
     public static void main(String[] args)
     {
-        String msg = "tany";
-        String key = "20186";
+        String msg = "Aditya";
+        String key = "110506";
 
         Encrypt e = new Encrypt(msg);
 
